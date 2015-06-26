@@ -1,6 +1,8 @@
 from Tkinter import *
 import tkMessageBox
 from urllib import urlopen
+import httplib, json
+import json as simplejson
 
 
 def doNothing():
@@ -22,6 +24,12 @@ def showdata(event):
 	documentField=content.read()
 	print(documentField)
 	dataval.insert(10,documentField)
+
+def getcouchdata(event):
+	import couchtest
+	foo = couchtest.Couch('localhost', '5984')
+	foo.openDoc('mydb', 'mydoc')
+	
 
 root = Tk()
 #for full screen
@@ -49,8 +57,9 @@ toolbar = Frame(root, bg="blue")
 toolbut1 = Button(toolbar, text="Button 1")
 toolbut1.pack(side=LEFT, padx=2, pady=2)
 toolbut1.bind("<Button-1>",showdata)
-toolbut2 = Button(toolbar, text="Button 2", command=doNothing)
+toolbut2 = Button(toolbar, text="Button 2")
 toolbut2.pack(side=LEFT, padx=2, pady=2)
+toolbut2.bind("<Button-1>", getcouchdata)
 toolbut3 = Button(toolbar, text="Button 1", command=doNothing)
 toolbut3.pack(side=LEFT, padx=2, pady=2)
 toolbut4 = Button(toolbar, text="Button 2", command=doNothing)
@@ -69,6 +78,14 @@ data.pack()
 documentField = StringVar()
 dataval = Entry(contentframe,relief=SUNKEN, justify=LEFT,textvariable=documentField)
 dataval.pack()
+
+data1 = Label(root, text="data1")
+data1.pack()
+
+documentField1 = StringVar()
+dataval1 = Entry(contentframe,relief=SUNKEN, justify=LEFT,textvariable=documentField1)
+dataval1.pack()
+
 contentframe.pack()
 
 

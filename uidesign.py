@@ -1,5 +1,7 @@
 from Tkinter import *
 import tkMessageBox
+from urllib import urlopen
+
 
 def doNothing():
     print("ok ok I won't...")
@@ -12,8 +14,14 @@ def QuittingWindow():
 		#import login
 		#login.QuitAll()
 
-
-
+def showdata(event):
+	#print("clicked button1")
+	dataval.delete(0,END)
+	content = urlopen("http://localhost:8080")
+	#print(content.read())
+	documentField=content.read()
+	print(documentField)
+	dataval.insert(10,documentField)
 
 root = Tk()
 #for full screen
@@ -38,8 +46,9 @@ editMenu.add_command(label="Redo", command=doNothing)
 
 toolbar = Frame(root, bg="blue")
 
-toolbut1 = Button(toolbar, text="Button 1", command=doNothing)
+toolbut1 = Button(toolbar, text="Button 1")
 toolbut1.pack(side=LEFT, padx=2, pady=2)
+toolbut1.bind("<Button-1>",showdata)
 toolbut2 = Button(toolbar, text="Button 2", command=doNothing)
 toolbut2.pack(side=LEFT, padx=2, pady=2)
 toolbut3 = Button(toolbar, text="Button 1", command=doNothing)
@@ -52,6 +61,16 @@ toolbut6 = Button(toolbar, text="Button 2", command=doNothing)
 toolbut6.pack(side=LEFT, padx=2, pady=2)
 
 toolbar.pack(side=TOP, fill=X)
+#content frame
+contentframe = Frame(root)
+data = Label(root, text="data")
+data.pack()
+
+documentField = StringVar()
+dataval = Entry(contentframe,relief=SUNKEN, justify=LEFT,textvariable=documentField)
+dataval.pack()
+contentframe.pack()
+
 
 # ******* Creating a Status Bar for the Bottom *******
 

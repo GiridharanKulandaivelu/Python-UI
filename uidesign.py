@@ -23,9 +23,10 @@ def showdata(event):
 	#print(content.read())
 	documentField=content.read()
 	print(documentField)
-	dataval.insert(10,documentField)
+	dataval.insert(0,documentField)
 
 def getcouchdata(event):
+	dataval1.delete(0,END)
 	import couchtest
 	foo = couchtest.Couch('localhost', '5984')
 	documentField1=foo.openDoc('mydb', 'mydoc')

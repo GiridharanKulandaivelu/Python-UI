@@ -22,7 +22,7 @@ l_username = Label(master, text="Name")
 l_password = Label(master, text="Password")
 
 d_username = Entry(master)
-d_password = Entry(master)
+d_password = Entry(master, show="*")
 
 l_username.grid(row=0)
 l_password.grid(row=1)

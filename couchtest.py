@@ -54,7 +54,8 @@ class Couch:
     def openDoc(self, dbName, docId):
         """Open a document in a given database"""
         r = self.get(''.join(['/', dbName, '/', docId,]))
-        prettyPrint(r)
+        #prettyPrint(r)
+        return r.read()
 
     def saveDoc(self, dbName, body, docId=None):
         """Save/create a document to/in a given database"""

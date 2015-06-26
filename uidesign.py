@@ -28,8 +28,9 @@ def showdata(event):
 def getcouchdata(event):
 	import couchtest
 	foo = couchtest.Couch('localhost', '5984')
-	foo.openDoc('mydb', 'mydoc')
-	
+	documentField1=foo.openDoc('mydb', 'mydoc')
+	print(documentField1)
+	dataval1.insert(10,documentField1)
 
 root = Tk()
 #for full screen
